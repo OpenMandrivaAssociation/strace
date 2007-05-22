@@ -1,6 +1,6 @@
 %define name	strace
 %define version	4.5.15
-%define	rel	1
+%define	rel	2
 %define release	%mkrel %{rel}
 #define cvsdate	20050803
 
@@ -18,7 +18,7 @@ Patch1:		strace-getdents64.patch
 Patch2:		strace-kernel26_userspace.patch
 Patch3:		strace-stat64.patch
 Patch4:		strace-sparc64.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 The strace program intercepts and records the system calls called
