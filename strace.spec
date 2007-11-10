@@ -1,24 +1,17 @@
-%define name	strace
-%define version	4.5.15
-%define	rel	2
-%define release	%mkrel %{rel}
-#define cvsdate	20050803
-
+Name:		strace
+Version:	4.5.16
+Release:	%mkrel 1
 Summary:	Tracks and displays system calls associated with a running process
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
 License:	BSD
 Group:		Development/Kernel
-URL:		http://www.liacs.nl/~wichert/strace/
-Source0:	%{name}-%{version}%{?cvsdate:-%{cvsdate}}.tar.bz2
+URL:		http://sourceforge.net/projects/strace/
+Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}.tar.bz2
 Source1:	%{name}.bash-completion
 Patch0:		strace-newsysc.patch
 Patch1:		strace-getdents64.patch
-Patch2:		strace-kernel26_userspace.patch
 Patch3:		strace-stat64.patch
 Patch4:		strace-sparc64.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The strace program intercepts and records the system calls called
@@ -34,27 +27,26 @@ received by a process.
 %setup -q
 %patch0 -p1 -b .newsysc
 %patch1 -p1 -b .getdents64
-%patch2 -p1 -b .kernel26
 %patch3 -p1 -b .stat64
 %patch4 -p1 -b .sparc64
 
 %build
-%configure
-%make
+%{configure2_5x}
+%{make}
 
 %install
-rm -rf %{buildroot}
-%makeinstall
+%{__rm} -rf %{buildroot}
+%{makeinstall_std}
 
 # remove unpackaged files
-rm -f %{buildroot}%{_bindir}/strace-graph
+%{__rm} %{buildroot}%{_bindir}/strace-graph
 
 # bash completion
-install -d -m 755 %{buildroot}%{_sysconfdir}/bash_completion.d
-install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
+%{__mkdir_p} %{buildroot}%{_sysconfdir}/bash_completion.d
+%{__cp} -a %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 
 %clean
-rm -rf %{buildroot}
+%{__rm} -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
@@ -62,5 +54,3 @@ rm -rf %{buildroot}
 %{_sysconfdir}/bash_completion.d/%{name}
 %{_bindir}/strace
 %{_mandir}/man1/strace.1*
-
-
