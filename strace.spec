@@ -1,6 +1,6 @@
 Name:		strace
 Version:	4.5.16
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
@@ -11,6 +11,8 @@ Patch0:		strace-newsysc.patch
 Patch1:		strace-getdents64.patch
 Patch3:		strace-stat64.patch
 Patch4:		strace-sparc64.patch
+# (fc) 4.5.16-2mdv display usbdevfs trace
+Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -29,6 +31,10 @@ received by a process.
 %patch1 -p1 -b .getdents64
 %patch3 -p1 -b .stat64
 %patch4 -p1 -b .sparc64
+%patch5 -p1 -b .usbdevfs
+
+#needed by patch5
+autoreconf
 
 %build
 %{configure2_5x}
