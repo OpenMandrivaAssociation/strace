@@ -13,7 +13,6 @@ Patch3:		strace-stat64.patch
 Patch4:		strace-sparc64.patch
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The strace program intercepts and records the system calls called
