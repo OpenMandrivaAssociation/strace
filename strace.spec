@@ -1,6 +1,6 @@
 Name:		strace
 Version:	4.5.16
-Release:	%mkrel 2
+Release:	%mkrel 3
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
