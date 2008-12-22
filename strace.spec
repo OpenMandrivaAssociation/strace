@@ -1,18 +1,16 @@
 Name:		strace
-Version:	4.5.16
-Release:	%mkrel 3
+Version:	4.5.18
+Release:	%mkrel 1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/strace/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}.tar.bz2
 Source1:	%{name}.bash-completion
-Patch0:		strace-newsysc.patch
-Patch1:		strace-getdents64.patch
 Patch3:		strace-stat64.patch
-Patch4:		strace-sparc64.patch
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
+Patch6:		strace-4.5.18-format_not_a_string_literal_and_no_format_arguments.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -27,22 +25,20 @@ received by a process.
 
 %prep
 %setup -q
-%patch0 -p1 -b .newsysc
-%patch1 -p1 -b .getdents64
 %patch3 -p1 -b .stat64
-%patch4 -p1 -b .sparc64
 %patch5 -p1 -b .usbdevfs
+%patch6 -p1 -b .format_not_a_string_literal_and_no_format_arguments
 
 #needed by patch5
 autoreconf
 
 %build
-%{configure2_5x}
+%configure2_5x
 %{make}
 
 %install
 %{__rm} -rf %{buildroot}
-%{makeinstall_std}
+%makeinstall_std
 
 # remove unpackaged files
 %{__rm} %{buildroot}%{_bindir}/strace-graph
