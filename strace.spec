@@ -1,12 +1,11 @@
 Name:		strace
 Version:	4.5.18
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/strace/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}.tar.bz2
-Source1:	%{name}.bash-completion
 Patch3:		strace-stat64.patch
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
@@ -43,16 +42,11 @@ autoreconf
 # remove unpackaged files
 %{__rm} %{buildroot}%{_bindir}/strace-graph
 
-# bash completion
-%{__mkdir_p} %{buildroot}%{_sysconfdir}/bash_completion.d
-%{__cp} -a %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
-
 %clean
 %{__rm} -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 %doc COPYRIGHT README* CREDITS ChangeLog INSTALL NEWS PORTING TODO
-%{_sysconfdir}/bash_completion.d/%{name}
 %{_bindir}/strace
 %{_mandir}/man1/strace.1*
