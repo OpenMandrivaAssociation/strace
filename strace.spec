@@ -1,6 +1,6 @@
 Name:		strace
-Version:	4.5.18
-Release:	%mkrel 4
+Version:	4.5.19
+Release:	%mkrel 1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
@@ -9,10 +9,6 @@ Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}
 Patch3:		strace-stat64.patch
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
-Patch6:		strace-4.5.18-format_not_a_string_literal_and_no_format_arguments.diff
-Patch7:		strace-4.5.18-printstr.patch
-Patch8:		strace_arm_eabi1.patch
-Patch9:		strace_arm_eabi2.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -29,10 +25,6 @@ received by a process.
 %setup -q
 %patch3 -p1 -b .stat64
 %patch5 -p1 -b .usbdevfs
-%patch6 -p1 -b .format_not_a_string_literal_and_no_format_arguments
-%patch7 -p1 -b .printstr
-%patch8 -p1 -b .eabi1
-%patch9 -p1 -b .eabi2
 
 #needed by patch5
 autoreconf
