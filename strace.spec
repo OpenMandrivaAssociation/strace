@@ -9,6 +9,7 @@ Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}
 Patch3:		strace-stat64.patch
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
+Patch6:		strace-4.5.19-linux_headers_fix.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -25,6 +26,7 @@ received by a process.
 %setup -q
 %patch3 -p1 -b .stat64
 %patch5 -p1 -b .usbdevfs
+%patch6 -p0 -b .linux_headers_fix
 
 #needed by patch5
 autoreconf
