@@ -1,15 +1,13 @@
 Name:		strace
-Version:	4.5.19
-Release:	%mkrel 2
+Version:	4.5.20
+Release:	%mkrel 1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/strace/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}.tar.bz2
-Patch3:		strace-stat64.patch
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
-Patch6:		strace-4.5.19-linux_headers_fix.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
@@ -24,9 +22,7 @@ received by a process.
 
 %prep
 %setup -q
-%patch3 -p1 -b .stat64
 %patch5 -p1 -b .usbdevfs
-%patch6 -p0 -b .linux_headers_fix
 
 #needed by patch5
 autoreconf
