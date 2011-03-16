@@ -1,11 +1,11 @@
 Name:		strace
-Version:	4.5.20
-Release:	%mkrel 2
+Version:	4.6
+Release:	%mkrel 1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/strace/
-Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}.tar.bz2
+Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}.tar.xz
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
