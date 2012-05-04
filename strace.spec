@@ -1,6 +1,6 @@
 Name:		strace
-Version:	4.6
-Release:	%mkrel 1
+Version:	4.7
+Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
@@ -8,7 +8,6 @@ URL:		http://sourceforge.net/projects/strace/
 Source0:	http://easynews.dl.sourceforge.net/sourceforge/strace/strace-%{version}.tar.xz
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The strace program intercepts and records the system calls called
@@ -22,7 +21,7 @@ received by a process.
 
 %prep
 %setup -q
-%patch5 -p1 -b .usbdevfs
+#patch5 -p1 -b .usbdevfs
 
 #needed by patch5
 autoreconf
@@ -32,17 +31,12 @@ autoreconf
 %{make}
 
 %install
-%{__rm} -rf %{buildroot}
 %makeinstall_std
 
 # remove unpackaged files
 %{__rm} %{buildroot}%{_bindir}/strace-graph
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
-%doc COPYRIGHT README* CREDITS ChangeLog INSTALL NEWS PORTING TODO
-%{_bindir}/strace
+%doc COPYRIGHT README* CREDITS ChangeLog NEWS
+%{_bindir}/strace*
 %{_mandir}/man1/strace.1*
