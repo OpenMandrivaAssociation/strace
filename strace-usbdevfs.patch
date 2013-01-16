@@ -1,41 +1,37 @@
-diff -Naurp strace-4.6/defs.h strace-4.6.oden/defs.h
---- strace-4.6/defs.h	2011-03-15 18:19:09.000000000 +0100
-+++ strace-4.6.oden/defs.h	2011-03-16 16:52:11.029913850 +0100
-@@ -592,6 +592,7 @@ extern int proc_ioctl(struct tcb *, int,
- extern int stream_ioctl(struct tcb *, int, int);
- #ifdef LINUX
+--- strace-4.7/defs.h.usbdevfs	2013-01-16 02:46:44.074913213 +0100
++++ strace-4.7/defs.h	2013-01-16 02:51:44.181355496 +0100
+@@ -593,6 +593,7 @@ extern int sock_ioctl(struct tcb *, long
+ extern int proc_ioctl(struct tcb *, int, int);
  extern int rtc_ioctl(struct tcb *, long, long);
-+extern int usbdevfs_ioctl(struct tcb *, long, long);
  extern int scsi_ioctl(struct tcb *, long, long);
++extern int usbdevfs_ioctl(struct tcb *, long, long);
  extern int block_ioctl(struct tcb *, long, long);
- #endif
-diff -Naurp strace-4.6/ioctl.c strace-4.6.oden/ioctl.c
---- strace-4.6/ioctl.c	2011-01-15 21:15:31.000000000 +0100
-+++ strace-4.6.oden/ioctl.c	2011-03-16 16:55:21.862390660 +0100
-@@ -155,6 +155,8 @@ long code, arg;
- 	case 0x03:
- 	case 0x12:
+ extern int mtd_ioctl(struct tcb *, long, long);
+ extern int loop_ioctl(struct tcb *, long, long);
+--- strace-4.7/ioctl.c.usbdevfs	2013-01-16 02:46:44.075913202 +0100
++++ strace-4.7/ioctl.c	2013-01-16 02:52:14.126997254 +0100
+@@ -88,6 +88,8 @@ ioctl_decode(struct tcb *tcp, long code,
  		return block_ioctl(tcp, code, arg);
-+	case 0x55:
-+		return usbdevfs_ioctl(tcp, code, arg);
  	case 0x22:
  		return scsi_ioctl(tcp, code, arg);
- #endif
-diff -Naurp strace-4.6/Makefile.am strace-4.6.oden/Makefile.am
---- strace-4.6/Makefile.am	2011-03-14 16:32:38.000000000 +0100
-+++ strace-4.6.oden/Makefile.am	2011-03-16 16:54:28.580140526 +0100
-@@ -18,7 +18,7 @@ AM_CPPFLAGS = -I$(srcdir)/$(OS)/$(ARCH)
- strace_SOURCES = strace.c syscall.c count.c util.c desc.c file.c ipc.c \
++	case 0x55:
++		return usbdevfs_ioctl(tcp, code, arg);
+ 	case 'L':
+ 		return loop_ioctl(tcp, code, arg);
+ 	case 'M':
+--- strace-4.7/Makefile.am.usbdevfs	2013-01-16 02:46:44.075913202 +0100
++++ strace-4.7/Makefile.am	2013-01-16 02:52:37.824712874 +0100
+@@ -18,7 +18,7 @@ strace_SOURCES = strace.c syscall.c coun
  		 io.c ioctl.c mem.c net.c process.c bjm.c quota.c \
  		 resource.c signal.c sock.c system.c term.c time.c \
--                proc.c scsi.c stream.c block.c
-+		usbdevfs.c proc.c scsi.c stream.c block.c
+ 		 scsi.c stream.c block.c pathtrace.c mtd.c vsprintf.c \
+-		 loop.c
++		 loop.c usbdevfs.c
  noinst_HEADERS = defs.h
  
  EXTRA_DIST = $(man_MANS) errnoent.sh signalent.sh syscallent.sh ioctlsort.c \
-diff -Naurp strace-4.6/usbdevfs.c strace-4.6.oden/usbdevfs.c
---- strace-4.6/usbdevfs.c	1970-01-01 01:00:00.000000000 +0100
-+++ strace-4.6.oden/usbdevfs.c	2011-03-16 16:52:11.031913898 +0100
+--- strace-4.7/usbdevfs.c.usbdevfs	2013-01-16 02:46:44.075913202 +0100
++++ strace-4.7/usbdevfs.c	2013-01-16 02:46:44.075913202 +0100
 @@ -0,0 +1,204 @@
 +/*
 + * Copyright (c) 1991, 1992 Paul Kranenburg <pk@cs.few.eur.nl>
@@ -70,15 +66,15 @@ diff -Naurp strace-4.6/usbdevfs.c strace-4.6.oden/usbdevfs.c
 +
 +#include "defs.h"
 +
-+#ifdef LINUX
++#if 1 //def LINUX
 +#include <linux/version.h>
 +#include <sys/timex.h>
 +#include <linux/ioctl.h>
 +#include <linux/rtc.h>
 +#include <linux/usbdevice_fs.h> /* for struct usbdevfs_urb */
-+#endif /* LINUX */
++//#endif /* LINUX */
 +
-+#ifdef LINUX
++//#ifdef LINUX
 +#define USB_ENDPOINT_DIR_MASK          0x80
 +
 +static void
