@@ -9,6 +9,7 @@ Source0:	http://switch.dl.sourceforge.net/project/strace/strace/%version/strace-
 Patch0:		strace-automake-1.13.patch
 # (fc) 4.5.16-2mdv display usbdevfs trace
 Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
+Patch6:		strace-aarch64.patch
 
 %track
 prog %name = {
@@ -42,17 +43,12 @@ autoconf
 %{make}
 
 %install
-%{__rm} -rf %{buildroot}
 %makeinstall_std
 
 # remove unpackaged files
 %{__rm} %{buildroot}%{_bindir}/strace-graph
 
-%clean
-%{__rm} -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %doc COPYRIGHT README* CREDITS ChangeLog INSTALL NEWS
 %_bindir/strace
 %_bindir/strace-log-merge
