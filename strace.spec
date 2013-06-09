@@ -1,15 +1,11 @@
 Name:		strace
-Version:	4.7
+Version:	4.8
 Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/strace/
 Source0:	http://switch.dl.sourceforge.net/project/strace/strace/%version/strace-%version.tar.xz
-Patch0:		strace-automake-1.13.patch
-# (fc) 4.5.16-2mdv display usbdevfs trace
-Patch5:		http://iki.fi/lindi/strace-usbdevfs.patch
-Patch6:		strace-aarch64.patch
 
 %track
 prog %name = {
@@ -32,12 +28,6 @@ received by a process.
 %setup -q
 %apply_patches
 
-#needed by patch5
-aclocal -I m4
-autoheader
-automake -a
-autoconf
-
 %build
 %configure2_5x
 %{make}
@@ -49,7 +39,7 @@ autoconf
 %{__rm} %{buildroot}%{_bindir}/strace-graph
 
 %files
-%doc COPYRIGHT README* CREDITS ChangeLog INSTALL NEWS
+%doc COPYING README* CREDITS ChangeLog INSTALL NEWS
 %_bindir/strace
 %_bindir/strace-log-merge
 %_mandir/man1/strace.1*
