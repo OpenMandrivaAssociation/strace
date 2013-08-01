@@ -1,6 +1,8 @@
+%bcond_without	uclibc
+
 Name:		strace
 Version:	4.8
-Release:	1
+Release:	2
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
@@ -24,26 +26,63 @@ purposes.
 Install strace if you need a tool to track the system calls made and
 received by a process.
 
+%package -n	uclibc-%{name}
+Summary:	uClibc build of strace
+Group:		Development/Kernel
+
+%description -n	uclibc-%{name}
+The strace program intercepts and records the system calls called
+and received by a running process.  Strace can print a record of
+each system call, its arguments and its return value.  Strace is useful
+for diagnosing problems and debugging, as well as for instructional
+purposes.
+
+Install strace if you need a tool to track the system calls made and
+received by a process.
+
 %prep
 %setup -q
-%apply_patches
 
 %build
+CONFIGURE_TOP="$PWD"
+%if %{with uclibc}
+mkdir -p uclibc
+pushd uclibc
+mkdir -p bits
+ln -sf %{uclibc_root}%{multiarch_includedir}/bits/stat.h bits/stat.h
+%uclibc_configure
+%make
+popd
+%endif
+
+mkdir -p glibc
+pushd glibc
 %configure2_5x
-%{make}
+%make
+popd
 
 %install
-%makeinstall_std
+%if %{with uclibc}
+%makeinstall_std -C uclibc
+rm %{buildroot}%{uclibc_root}%{_bindir}/strace-graph
+%endif
+
+%makeinstall_std -C glibc
 
 # remove unpackaged files
-%{__rm} %{buildroot}%{_bindir}/strace-graph
+rm %{buildroot}%{_bindir}/strace-graph
 
 %files
 %doc COPYING README* CREDITS ChangeLog INSTALL NEWS
-%_bindir/strace
-%_bindir/strace-log-merge
-%_mandir/man1/strace.1*
+%{_bindir}/strace
+%{_bindir}/strace-log-merge
+%{_mandir}/man1/strace.1*
 
+%if %{with uclibc}
+%files -n uclibc-%{name}
+%{uclibc_root}%{_bindir}/strace
+%{uclibc_root}%{_bindir}/strace-log-merge
+%endif
 
 %changelog
 * Wed Mar 16 2011 Oden Eriksson <oeriksson@mandriva.com> 4.6-1mdv2011.0
