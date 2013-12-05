@@ -2,12 +2,15 @@
 
 Name:		strace
 Version:	4.8
-Release:	2
+Release:	3
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
-URL:		http://sourceforge.net/projects/strace/
-Source0:	http://switch.dl.sourceforge.net/project/strace/strace/%version/strace-%version.tar.xz
+URL:		http://sourceforge.net/projects/%{name}/
+Source0:	http://switch.dl.sourceforge.net/project/%{name}/%{version}/%{name}-%{version}.tar.xz
+# These can be removed on the next version bump
+Source1:	git-version-gen
+Patch0:		strace-4.8-git-ptrace.patch
 
 %track
 prog %name = {
@@ -42,6 +45,9 @@ received by a process.
 
 %prep
 %setup -q
+%patch0 -p1 -b .ptrace~
+cp %{SOURCE1} .
+autoreconf -fis
 
 %build
 CONFIGURE_TOP="$PWD"
