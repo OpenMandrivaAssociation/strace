@@ -46,7 +46,7 @@ received by a process.
 %prep
 %setup -q
 %patch0 -p1 -b .ptrace~
-cp %{SOURCE1} .
+install -m755 %{SOURCE1} .
 autoreconf -fis
 
 %build
