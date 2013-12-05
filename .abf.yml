@@ -1,4 +1,2 @@
-removed_sources:
-  strace-4.7.tar.xz: af917d27abf54b43fecf10373b320a2d42dfba4e
 sources:
   strace-4.8.tar.xz: 88c19b900d9cb2931e6ea4cf36e0ae3838f2f698
