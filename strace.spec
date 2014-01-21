@@ -1,11 +1,12 @@
 Name:		strace
 Version:	4.8
-Release:	5
+Release:	6
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/strace/
 Source0:	http://switch.dl.sourceforge.net/project/strace/strace/%version/strace-%version.tar.xz
+Patch0:		strace-4.8-ptrace-glibc-2.19.patch
 
 %track
 prog %name = {
