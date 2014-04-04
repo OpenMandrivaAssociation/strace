@@ -2,7 +2,7 @@
 
 Name:		strace
 Version:	4.8
-Release:	6
+Release:	7
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
@@ -47,6 +47,7 @@ received by a process.
 %prep
 %setup -q
 %patch0 -p1 -b .ptrace~
+%patch1 -p1 -b .glibc219~
 install -m755 %{SOURCE1} .
 autoreconf -fis
 
