@@ -11,7 +11,6 @@ Source0:	http://switch.dl.sourceforge.net/project/%{name}/%{version}/%{name}-%{v
 # These can be removed on the next version bump
 Source1:	git-version-gen
 Patch0:		strace-4.8-git-ptrace.patch
-Patch1:		strace-4.8-ptrace-glibc-2.19.patch
 
 %track
 prog %{name} = {
@@ -46,8 +45,7 @@ received by a process.
 
 %prep
 %setup -q
-%patch0 -p1 -b .ptrace~
-%patch1 -p1 -b .glibc219~
+%apply_patches
 install -m755 %{SOURCE1} .
 autoreconf -fis
 
@@ -85,3 +83,7 @@ rm %{buildroot}%{_bindir}/strace-graph
 %{_bindir}/strace
 %{_bindir}/strace-log-merge
 %{_mandir}/man1/strace.1*
+
+%files -n uclibc-%{name}
+%{_prefix}/uclibc/%{_bindir}/strace
+%{_prefix}/uclibc/%{_bindir}/strace-log-merge
