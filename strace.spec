@@ -29,6 +29,7 @@ purposes.
 Install strace if you need a tool to track the system calls made and
 received by a process.
 
+%if %{with uclibc}
 %package -n	uclibc-%{name}
 Summary:	uClibc build of strace
 Group:		Development/Kernel
@@ -42,6 +43,7 @@ purposes.
 
 Install strace if you need a tool to track the system calls made and
 received by a process.
+%endif
 
 %prep
 %setup -q
@@ -63,7 +65,7 @@ popd
 
 mkdir -p glibc
 pushd glibc
-%configure2_5x
+%configure
 %make
 popd
 
@@ -84,6 +86,8 @@ rm %{buildroot}%{_bindir}/strace-graph
 %{_bindir}/strace-log-merge
 %{_mandir}/man1/strace.1*
 
+%if %{with uclibc}
 %files -n uclibc-%{name}
 %{_prefix}/uclibc/%{_bindir}/strace
 %{_prefix}/uclibc/%{_bindir}/strace-log-merge
+%endif
