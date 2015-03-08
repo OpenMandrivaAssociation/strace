@@ -1,16 +1,15 @@
 %bcond_without	uclibc
 
 Name:		strace
-Version:	4.8
-Release:	10
+Version:	4.10
+Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/%{name}/
-Source0:	http://switch.dl.sourceforge.net/project/%{name}/%{version}/%{name}-%{version}.tar.xz
+Source0:	http://downloads.sourceforge.net/project/strace/strace/%{version}/%{name}-%{version}.tar.xz
 # These can be removed on the next version bump
 Source1:	git-version-gen
-Patch0:		strace-4.8-git-ptrace.patch
 
 %track
 prog %{name} = {
