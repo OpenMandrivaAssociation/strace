@@ -10,6 +10,7 @@ URL:		http://sourceforge.net/projects/%{name}/
 Source0:	http://downloads.sourceforge.net/project/strace/strace/%{version}/%{name}-%{version}.tar.xz
 # These can be removed on the next version bump
 Source1:	git-version-gen
+Patch0:		strace-4.10-musl.patch
 
 %track
 prog %{name} = {
