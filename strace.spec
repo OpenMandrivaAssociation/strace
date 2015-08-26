@@ -1,8 +1,8 @@
-%bcond_without	uclibc
+%bcond_with	uclibc
 
 Name:		strace
 Version:	4.10
-Release:	2
+Release:	3
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
