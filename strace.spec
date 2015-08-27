@@ -11,6 +11,10 @@ Source0:	http://downloads.sourceforge.net/project/strace/strace/%{version}/%{nam
 # These can be removed on the next version bump
 Source1:	git-version-gen
 Patch0:		strace-4.10-musl.patch
+Patch1:		01_aarch64_rt_sigreturn.patch
+Patch2:		02_arm_mmap2.patch
+Patch3:		03_aarch64_arch_regs.patch
+Patch4:		06_fix_aarch64_ioctl_decoding.patch
 
 %track
 prog %{name} = {
@@ -79,9 +83,11 @@ rm %{buildroot}%{uclibc_root}%{_bindir}/strace-graph
 
 # remove unpackaged files
 rm %{buildroot}%{_bindir}/strace-graph
+# remove INSTALL file
+rm %{buildroot}/%{_defaultdocdir}/%{name}/INSTALL
 
 %files
-%doc COPYING README* CREDITS ChangeLog INSTALL NEWS
+%doc COPYING README* CREDITS ChangeLog NEWS
 %{_bindir}/strace
 %{_bindir}/strace-log-merge
 %{_mandir}/man1/strace.1*
