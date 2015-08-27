@@ -84,7 +84,7 @@ rm %{buildroot}%{uclibc_root}%{_bindir}/strace-graph
 # remove unpackaged files
 rm %{buildroot}%{_bindir}/strace-graph
 # remove INSTALL file
-rm %{buildroot}/%{_defaultdocdir}/%{name}/INSTALL
+rm INSTALL
 
 %files
 %doc COPYING README* CREDITS ChangeLog NEWS
