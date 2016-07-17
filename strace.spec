@@ -6,6 +6,7 @@ License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/%{name}/
 Source0:	http://downloads.sourceforge.net/project/strace/strace/%{version}/%{name}-%{version}.tar.xz
+Source1:	git-version-gen
 
 %track
 prog %{name} = {
@@ -27,6 +28,7 @@ received by a process.
 %prep
 %setup -q
 %apply_patches
+install -m755 %{SOURCE1} .
 
 %build
 %configure
