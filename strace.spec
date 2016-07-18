@@ -1,12 +1,17 @@
 Name:		strace
 Version:	4.12
-Release:	4
+Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://sourceforge.net/projects/%{name}/
 Source0:	http://downloads.sourceforge.net/project/strace/strace/%{version}/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
+BuildRequires:	time
+%ifarch x86_64
+# for experimental -k option
+BuildRequires:	pkgconfig(libunwind)
+%endif
 
 %track
 prog %{name} = {
