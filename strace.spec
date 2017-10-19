@@ -1,10 +1,10 @@
 Name:		strace
-Version:	4.18
+Version:	4.19
 Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
-URL:		http://sourceforge.net/projects/%{name}/
+URL:		http://strace.io/
 Source0:	http://downloads.sourceforge.net/project/strace/strace/%{version}/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
 BuildRequires:	time
