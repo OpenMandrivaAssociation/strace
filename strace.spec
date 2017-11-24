@@ -1,5 +1,5 @@
 Name:		strace
-Version:	4.19
+Version:	4.20
 Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
