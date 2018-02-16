@@ -47,4 +47,4 @@ rm INSTALL
 %doc COPYING README* CREDITS NEWS
 %{_bindir}/strace
 %{_bindir}/strace-log-merge
-%{_mandir}/man1/strace.1*
+%{_mandir}/man1/strace*.1*
