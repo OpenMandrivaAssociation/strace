@@ -1,20 +1,18 @@
+%global _disable_rebuild_configure 1
+
 Name:		strace
-Version:	4.21
+Version:	4.22
 Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://strace.io/
-Source0:	http://downloads.sourceforge.net/project/strace/strace/%{version}/%{name}-%{version}.tar.xz
+Source0:	https://github.com/strace/strace/archive/v%{version}.tar.gz
 Source1:	git-version-gen
+Patch0:		strace-4.22-linkage.patch
 BuildRequires:	time
-
-%track
-prog %{name} = {
-	url = http://sourceforge.net/projects/strace/
-	version = %{version}
-	regex = %{name}-(__VER__)\.tar\.xz
-}
+BuildRequires:	m4 automake autoconf
+BuildRequires:	pkgconfig(liblzma)
 
 %description
 The strace program intercepts and records the system calls called
@@ -27,11 +25,11 @@ Install strace if you need a tool to track the system calls made and
 received by a process.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 install -m755 %{SOURCE1} .
 
 %build
+./bootstrap
 %configure
 %make
 
@@ -44,7 +42,7 @@ rm %{buildroot}%{_bindir}/strace-graph
 rm INSTALL
 
 %files
-%doc COPYING README* CREDITS NEWS
+%doc COPYING README* NEWS
 %{_bindir}/strace
 %{_bindir}/strace-log-merge
 %{_mandir}/man1/strace*.1*
