@@ -1,17 +1,19 @@
 %global _disable_rebuild_configure 1
 
 Name:		strace
-Version:	4.22
-Release:	2
+Version:	4.24
+Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://strace.io/
-Source0:	https://github.com/strace/strace/archive/v%{version}.tar.gz
+Source0:	https://github.com/strace/strace/archive/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
 Patch0:		strace-4.22-linkage.patch
 BuildRequires:	time
-BuildRequires:	m4 automake autoconf
+BuildRequires:	m4
+BuildRequires:	automake
+BuildRequires:	autoconf
 BuildRequires:	pkgconfig(liblzma)
 
 %description
@@ -31,10 +33,10 @@ install -m755 %{SOURCE1} .
 %build
 ./bootstrap
 %configure
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 # remove unpackaged files
 rm %{buildroot}%{_bindir}/strace-graph
