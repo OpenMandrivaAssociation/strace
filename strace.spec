@@ -10,9 +10,6 @@ URL:		http://strace.io/
 Source0:	https://github.com/strace/strace/archive/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
 BuildRequires:	time
-BuildRequires:	m4
-BuildRequires:	automake
-BuildRequires:	autoconf
 BuildRequires:	pkgconfig(liblzma)
 
 %description
@@ -30,7 +27,6 @@ received by a process.
 install -m755 %{SOURCE1} .
 
 %build
-./bootstrap
 %configure
 %make_build
 
