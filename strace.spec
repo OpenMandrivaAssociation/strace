@@ -9,7 +9,6 @@ Group:		Development/Kernel
 URL:		http://strace.io/
 Source0:	https://github.com/strace/strace/archive/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
-Patch0:		strace-4.22-linkage.patch
 BuildRequires:	time
 BuildRequires:	m4
 BuildRequires:	automake
