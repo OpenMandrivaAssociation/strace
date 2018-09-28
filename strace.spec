@@ -27,7 +27,10 @@ received by a process.
 install -m755 %{SOURCE1} .
 
 %build
-%configure
+export CC=gcc
+export CXX=g++
+
+%configure --enable-mpers=check
 %make_build
 
 %install
