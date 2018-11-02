@@ -1,13 +1,13 @@
 %global _disable_rebuild_configure 1
 
 Name:		strace
-Version:	4.24
-Release:	2
+Version:	4.25
+Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://strace.io/
-Source0:	https://github.com/strace/strace/archive/%{name}-%{version}.tar.xz
+Source0:	https://github.com/strace/strace/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
 BuildRequires:	time
 BuildRequires:	pkgconfig(liblzma)
@@ -27,8 +27,8 @@ received by a process.
 install -m755 %{SOURCE1} .
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 
 %configure --enable-mpers=check
 %make_build
