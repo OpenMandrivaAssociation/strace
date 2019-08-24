@@ -2,7 +2,7 @@
 
 Name:		strace
 Version:	5.2
-Release:	2
+Release:	3
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
