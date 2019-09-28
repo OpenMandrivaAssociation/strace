@@ -1,15 +1,14 @@
 %global _disable_rebuild_configure 1
 
 Name:		strace
-Version:	5.2
-Release:	3
+Version:	5.3
+Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
 Group:		Development/Kernel
 URL:		http://strace.io/
 Source0:	https://github.com/strace/strace/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
-Patch0:		strace-5.2-compile.patch
 BuildRequires:	time
 BuildRequires:	pkgconfig(liblzma)
 
