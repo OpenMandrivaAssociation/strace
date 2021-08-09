@@ -1,7 +1,7 @@
 %global _disable_rebuild_configure 1
 
 Name:		strace
-Version:	5.10
+Version:	5.13
 Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
@@ -32,11 +32,6 @@ install -m755 %{SOURCE1} .
 
 %install
 %make_install
-
-# remove unpackaged files
-rm %{buildroot}%{_bindir}/strace-graph
-# remove INSTALL file
-rm INSTALL
 
 %files
 %doc COPYING README* NEWS
