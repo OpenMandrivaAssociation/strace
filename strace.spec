@@ -16,6 +16,11 @@ Group:		Development/Kernel
 URL:		https://strace.io/
 Source0:	https://github.com/strace/strace/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source1:	git-version-gen
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	time
 BuildRequires:	pkgconfig(liblzma)
 
