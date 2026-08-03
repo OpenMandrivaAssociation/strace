@@ -23,6 +23,7 @@ BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	time
 BuildRequires:	pkgconfig(liblzma)
+BuildRequires:  atomic-devel
 
 %description
 The strace program intercepts and records the system calls called
