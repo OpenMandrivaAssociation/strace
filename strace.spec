@@ -8,7 +8,7 @@
 %global _disable_rebuild_configure 1
 
 Name:		strace
-Version:	7.1
+Version:	7.2
 Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
@@ -18,7 +18,6 @@ Source0:	https://github.com/strace/strace/releases/download/v%{version}/%{name}-
 Source1:	git-version-gen
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	time
