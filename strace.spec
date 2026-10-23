@@ -8,7 +8,7 @@
 %global _disable_rebuild_configure 1
 
 Name:		strace
-Version:	7.2
+Version:	7.3
 Release:	1
 Summary:	Tracks and displays system calls associated with a running process
 License:	BSD
